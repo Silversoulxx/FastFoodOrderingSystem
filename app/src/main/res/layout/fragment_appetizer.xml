@@ -26,7 +26,7 @@
             android:layout_margin="20dp"
             android:layout_weight="1"
             android:gravity="center_vertical|left|start"
-            android:text="French Fries"
+            android:text="French Friess"
             android:textAlignment="textStart" />
 
         <Button
