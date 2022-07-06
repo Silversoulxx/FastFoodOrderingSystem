@@ -20,13 +20,13 @@
             app:srcCompat="@drawable/frenchfries" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_app1"
             android:layout_width="168dp"
             android:layout_height="40dp"
             android:layout_margin="20dp"
             android:layout_weight="1"
             android:gravity="center_vertical|left|start"
-            android:text="TextView"
+            android:text="French Fries"
             android:textAlignment="textStart" />
 
         <Button
