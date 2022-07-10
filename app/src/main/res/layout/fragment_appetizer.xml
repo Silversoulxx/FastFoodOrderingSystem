@@ -21,13 +21,17 @@
 
         <TextView
             android:id="@+id/tv_app1"
-            android:layout_width="168dp"
-            android:layout_height="40dp"
-            android:layout_margin="20dp"
+            android:layout_width="141dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_vertical|left|start"
-            android:text="French Fries"
-            android:textAlignment="textStart" />
+            android:text="French Fries" />
+
+        <TextView
+            android:id="@+id/tv_app1price"
+            android:layout_width="134dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="S$4.40" />
 
         <Button
             android:id="@+id/btn_appplus1"
@@ -51,21 +55,25 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageView2"
             android:layout_width="154dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@drawable/mashedpot" />
 
         <TextView
             android:id="@+id/tv_app2"
             android:layout_width="168dp"
-            android:layout_height="40dp"
-            android:layout_margin="20dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_vertical|left|start"
-            android:text="Mashes Potatoe"
-            android:textAlignment="textStart" />
+            android:text="Mashes Potatoes" />
+
+        <TextView
+            android:id="@+id/tv_app2price"
+            android:layout_width="134dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="S$3.20" />
 
         <Button
             android:id="@+id/btn_appplus2"
