@@ -41,6 +41,12 @@
                 android:layout_weight="21"
                 android:text="Table number" />
 
+            <Button
+                android:id="@+id/btn_scan"
+                android:layout_width="65dp"
+                android:layout_height="48dp"
+                android:text="test" />
+
         </LinearLayout>
 
     </LinearLayout>
@@ -53,6 +59,8 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/mypager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+
+    </androidx.viewpager2.widget.ViewPager2>
 
 </LinearLayout>
