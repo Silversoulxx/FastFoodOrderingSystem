@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private String[] titles = new String[]{"Appetizer", "Main", "Dessert", "Bill"};
     Button btn_scan;
     TextView tv_Tablenum;
-    String tablenum;
+    int tablenum;
     private static String url_send_tablenum = MainActivity.ipBaseAddress+"/obtain_table_ordersJSON.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_PRODUCT = "product";
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         new TabLayoutMediator(tabLayout, viewPager,(tab, position) -> tab.setText(titles[position])).attach();
 
 //sending assigned table number to database
-        tablenum = tv_Tablenum.getText().toString();
+        tablenum = 1;
 
         JSONObject dataJson = new JSONObject();
 
@@ -132,13 +132,16 @@ public class MainActivity extends AppCompatActivity {
         public Fragment createFragment(int pos) {
             switch (pos) {
                 case 0: {
-// return FirstFragment.newInstance( );
+return Appetizer.newInstance( );
                 }
                 case 1: {
 // return SecondFragment.newInstance( );
                 }
                 case 2: {
 // return ThirdFragment.newInstance( );
+                }
+                case 3: {
+//return BillingSummary.newInstance( );
                 }
                 default:
                     return new Fragment(); // return a dummy empty fragment first
