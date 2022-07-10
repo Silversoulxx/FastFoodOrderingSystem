@@ -10,18 +10,26 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanOptions;
 
 public class MainActivity extends AppCompatActivity {
+
     private static final int NUM_PAGES = 4; //4 tabbed views
     //The pager widget, which handles animation and allows swiping horizontally to access previous and next wizard steps.
     public static ViewPager2 viewPager;
     // The pager adapter, which provides the pages to the view pager widget.
     private FragmentStateAdapter pagerAdapter;
-    // Arrey of strings FOR TABS TITLES
+    // Array of strings FOR TABS TITLES
     private String[] titles = new String[]{"Appetizer", "Main", "Dessert", "Bill"};
+    Button btn_scan;
+    TextView tv_Tablenum;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,45 +37,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         pagerAdapter = new MyPagerAdapter(this);
         viewPager = findViewById(R.id.mypager);
-        viewPager.setAdapter(pagerAdapter)
+        viewPager.setAdapter(pagerAdapter);
         btn_scan =findViewById(R.id.btn_scan);
-        btn_scan.setOnClickListener(v->{
-            scanCode();
+        btn_scan.setOnClickListener(v-> {
+                    scanCode();
+                });
 //inflating tab layout
         TabLayout tabLayout =( TabLayout) findViewById(R.id.tab_layout);
 //displaying tabs
         new TabLayoutMediator(tabLayout, viewPager,(tab, position) -> tab.setText(titles[position])).attach();
     }
-    private void scanCode(){
-        ScanOptions options = new ScanOptions();
-        options.setPrompt("Volume up to flash on");
-        options.setBeepEnabled(true);
-        options.setOrientationLocked(true);
-        options.setCaptureActivity(CaptureAct.class);
-        barLaucher.launch(options);
-
-    }
-
-    ActivityResultLauncher<ScanOptions> barLaucher = registerForActivityResult(new ScanContract(),result ->
-    {
-        if(result.getContents() !=null)
-        {
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setTitle("Result");
-            builder.setMessage(result.getContents());
-            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            }).show();
-
-            txtResult=findViewById(R.id.textResult);
-            txtResult.setText("Table"+result.getContents());
-
-        }
-    });
     private class MyPagerAdapter extends FragmentStateAdapter {
         public MyPagerAdapter(FragmentActivity fa) {
             super(fa);
@@ -93,4 +72,35 @@ public class MainActivity extends AppCompatActivity {
             return NUM_PAGES;
         }
     }
+
+    private void scanCode(){
+        ScanOptions options = new ScanOptions();
+        options.setPrompt("Volume up to flash on");
+        options.setBeepEnabled(true);
+        options.setOrientationLocked(true);
+        options.setCaptureActivity(CaptureAct.class);
+        barLaucher.launch(options);
+
+    }
+
+    ActivityResultLauncher<ScanOptions> barLaucher = registerForActivityResult(new ScanContract(), result ->
+    {
+        if(result.getContents() !=null)
+        {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Result");
+            builder.setMessage(result.getContents());
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            }).show();
+
+            tv_Tablenum =findViewById(R.id.tv_Tablenum);
+            tv_Tablenum.setText("Table"+result.getContents());
+
+        }
+    });
 }
