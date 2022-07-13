@@ -56,8 +56,11 @@ public class MainActivity extends AppCompatActivity {
         pagerAdapter = new MyPagerAdapter(this);
         viewPager = findViewById(R.id.mypager);
         viewPager.setAdapter(pagerAdapter);
-        scanCode();
+        btn_scan =findViewById(R.id.btn_scan);
 
+        btn_scan.setOnClickListener(v-> {
+                    scanCode();
+                });
 //inflating tab layout
         TabLayout tabLayout =( TabLayout) findViewById(R.id.tab_layout);
 //displaying tabs
@@ -167,7 +170,7 @@ return Appetizer.newInstance( );
 
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle("Result");
-            builder.setMessage("Your table number is number "+result.getContents());
+            builder.setMessage(result.getContents());
             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -177,8 +180,9 @@ return Appetizer.newInstance( );
 
             tv_Tablenum =findViewById(R.id.tv_Tablenum);
 
-            tv_Tablenum.setText("Table "+result.getContents());
+            tv_Tablenum.setText("Table"+result.getContents());
 
         }
     });
 }
+ss
