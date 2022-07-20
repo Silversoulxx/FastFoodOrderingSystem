@@ -88,7 +88,7 @@ public class BillingSummary extends Fragment {
         // Loading billing items in Background Thread
         postData(url_all_products, null);
         //#6 ClickListener for btnViewData
-//        btn_Submit.setOnClickListener(new View.OnClickListener() {
+////        btn_Submit.setOnClickListener(new View.OnClickListener() {
 ////            public void onClick(View arg0) {
 ////                //move from MainActivity page to ListView Page
 ////                Intent intent = new Intent(this, ListViewActivity.class);
