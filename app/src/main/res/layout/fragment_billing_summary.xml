@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BillingSummary">
+    android:orientation="vertical"
+    tools:context=".BillingSummary" >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="680dp">
 
-</FrameLayout>
+    </ListView>
+
+    <Button
+        android:id="@+id/btn_Submit"
+        android:layout_width="104dp"
+        android:layout_height="27dp"
+        android:layout_marginLeft="65pt"
+        android:layout_weight="1"
+        android:text="Send Orders" />
+
+</LinearLayout>
