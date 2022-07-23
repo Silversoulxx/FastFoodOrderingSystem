@@ -53,16 +53,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tv_Tablenum = (TextView) findViewById(R.id.tv_Tablenum);
+
         pagerAdapter = new MyPagerAdapter(this);
         viewPager = findViewById(R.id.mypager);
         viewPager.setAdapter(pagerAdapter);
         //scanCode(); // taken out to QR_Page
 
-        // to be fix, havent done
-        Intent myintent =getIntent();
-        String tableNumget = getIntent().getStringExtra("tableNum");
-        tv_Tablenum.setText("Table is this thingy"+tableNumget);
+        // 24/7to be fix, havent done
+        Intent incomingintent =getIntent();
+        String tableNumget = incomingintent.getStringExtra("tableNum");
+        //Log.i("tableNumget", tableNumget); //when set this will crash, but it show i success to get QR scan , unable show on text view, only show as Null
+        tv_Tablenum = (TextView) findViewById(R.id.tv_Tablenum);
+        tv_Tablenum.setText("Table is this thingy" + tableNumget ); // ffs , for some reason it will reload back even i success, something is wrong,but i duno where
 
 //inflating tab layout
         TabLayout tabLayout =( TabLayout) findViewById(R.id.tab_layout);

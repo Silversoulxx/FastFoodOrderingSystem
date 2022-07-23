@@ -58,7 +58,7 @@ public class QR_Page extends AppCompatActivity {
     {
         if(result.getContents() !=null)
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(QR_Page.this);//<< please put QR_Page not main activity
+            /*AlertDialog.Builder builder = new AlertDialog.Builder(QR_Page.this);//<< please put QR_Page not main activity
             builder.setTitle("Result");
             builder.setMessage(result.getContents());
             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -66,14 +66,14 @@ public class QR_Page extends AppCompatActivity {
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.dismiss();
                 }
-            }).show();
+            }).show();*/
 
             tablenum=result.getContents();
 
-
-            Intent myintent = new Intent(QR_Page.this,MainActivity.class);
-            myintent.putExtra("tableNum",tablenum.toString());
-            startActivity(myintent);
+            //24/7 to be fix
+            Intent intent = new Intent(QR_Page.this,MainActivity.class);
+            intent.putExtra("tableNum",result.getContents());
+            startActivity(intent);
 
 
 
