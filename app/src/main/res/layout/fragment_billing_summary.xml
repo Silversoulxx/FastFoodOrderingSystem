@@ -13,12 +13,9 @@
 
     </ListView>
 
-    <Button
-        android:id="@+id/btn_Submit"
-        android:layout_width="104dp"
-        android:layout_height="27dp"
-        android:layout_marginLeft="65pt"
-        android:layout_weight="1"
-        android:text="Send Orders" />
+    <TextView
+        android:id="@+id/tvBillTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

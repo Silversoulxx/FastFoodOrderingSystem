@@ -1,9 +1,9 @@
 package mdad.localdata.fastfoodorderingsystem;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +14,14 @@ import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
-import android.widget.Button;
+
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -42,16 +45,20 @@ public class BillingSummary extends Fragment {
     private String mParam2;
     ListView lv;
     View root;
-    Button btn_Submit;
     ArrayList<HashMap<String, String>> productsList;
+    TextView tvBillTotal;
 
-
+    // url to get all products list
     private static String url_all_products = MainActivity.ipBaseAddress + "/billing_table_ordersJSON.php";
+
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_TABLEORDERS = "TABLE_ORDERS";
     private static final String TAG_ITEM_NAME = "ITEM_NAME";
     private static final String TAG_PRICE = "PRICE";
+    private static final String TAG_QUANTITY = "QTY";
+    private static final String TAG_SUBTOTAL = "SUBTOTAL";
+    //private static final String TAG_TOTAL = "TOTAL";
     // products JSONArray
     JSONArray TABLE_ORDERS = null;
     public BillingSummary() {
@@ -79,31 +86,19 @@ public class BillingSummary extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         root = inflater.inflate(R.layout.fragment_billing_summary, container, false);
+        tvBillTotal = root.findViewById(R.id.tvBillTotal);
         lv = root.findViewById(R.id.list);
-        btn_Submit = (Button) getView().findViewById(R.id.btn_Submit);
         // ArrayList for ListView
         productsList = new ArrayList<HashMap<String, String>>();
         // Loading billing items in Background Thread
         postData(url_all_products, null);
-        //#6 ClickListener for btnViewData
-////        btn_Submit.setOnClickListener(new View.OnClickListener() {
-////            public void onClick(View arg0) {
-////                //move from MainActivity page to ListView Page
-////                Intent intent = new Intent(this, ListViewActivity.class);
-////                startActivity(intent);
-////            }
-////        });
 
         return root;
 
     }
-
+//postData will obtain the database list of bills and list
     public void postData(String url, final JSONObject json) {
-
-
-
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
                 Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
@@ -113,8 +108,7 @@ public class BillingSummary extends Fragment {
             }
 
         }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            @Override public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
             }
         });
@@ -135,13 +129,24 @@ public class BillingSummary extends Fragment {
                     // Storing each json item in variable
                     String item = c.getString(TAG_ITEM_NAME);
                     String price = c.getString(TAG_PRICE);
+                    String quantity = c.getString(TAG_QUANTITY);
+                    String subtotal = c.getString(TAG_SUBTOTAL);
+                    //int subtotalint = Integer.parseInt(subtotal);
+                    //int total = c.getInt(TAG_TOTAL);
 
                     // creating new HashMap
                     HashMap<String, String> map = new HashMap<String, String>();
 
                     // adding each child node to HashMap key => value
-                    map.put(TAG_ITEM_NAME, item);
-                    map.put(TAG_PRICE, price);
+                    map.put(TAG_ITEM_NAME, "Item: "+item+ "       Price: $"+price+ "       Qty: "+quantity);
+                    map.put(TAG_SUBTOTAL, "Subtotal: $" +subtotal);
+/*                    int grandtotal=0;
+                    for (int e=0; e <subtotal.length(); e++){
+                        grandtotal += Integer.parseInt(subtotal(e));
+                        System.out.println("sum->" + grandtotal);
+                    };*/
+                    //tvBillTotal.setText(total);
+
 
                     // adding HashList to ArrayList
                     productsList.add(map);
@@ -150,11 +155,13 @@ public class BillingSummary extends Fragment {
                 /**
                  * Updating parsed JSON data into ListView
                  * */
+
+
                 ListAdapter adapter = new SimpleAdapter(
                         getActivity().getApplicationContext(), productsList,
                         R.layout.list_item, new String[]{TAG_ITEM_NAME,
-                        TAG_PRICE},
-                        new int[]{R.id.item_name, R.id.price});
+                        TAG_PRICE,TAG_QUANTITY, TAG_SUBTOTAL},
+                        new int[]{R.id.item_name, R.id.price, R.id.quantity, R.id.subtotal});
                 // updating listview
                 lv.setAdapter(adapter);
 
