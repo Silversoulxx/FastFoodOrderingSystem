@@ -28,7 +28,7 @@ import org.json.JSONObject;
 public class QR_Page extends AppCompatActivity {
     public static String ipBaseAddress ="http://testmappd.atspace.cc/products";
 
-    TextView tv_Tablenum;
+    String tv_Tablenum;
     String tablenum;
     private static String url_send_tablenum = MainActivity.ipBaseAddress+"/obtain_table_ordersJSON.php";
     private static final String TAG_SUCCESS = "success";
@@ -44,7 +44,7 @@ public class QR_Page extends AppCompatActivity {
 
     }
     private void scanCode(){
-        ScanOptions options = new ScanOptions();
+        ScanOptions options = new ScanOptions(); //summon function for scan
         options.setPrompt("Volume up to flash on");
         options.setBeepEnabled(true);
         options.setOrientationLocked(true);
@@ -58,7 +58,7 @@ public class QR_Page extends AppCompatActivity {
     {
         if(result.getContents() !=null)
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(QR_Page.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(QR_Page.this);//<< please put QR_Page not main activity
             builder.setTitle("Result");
             builder.setMessage(result.getContents());
             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -68,9 +68,15 @@ public class QR_Page extends AppCompatActivity {
                 }
             }).show();
 
-
-
             tablenum=result.getContents();
+
+
+            Intent myintent = new Intent(QR_Page.this,MainActivity.class);
+            myintent.putExtra("tableNum",tablenum.toString());
+            startActivity(myintent);
+
+
+
 
             sendData();
 

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private String[] titles = new String[]{"Appetizer", "Main", "Dessert", "Bill"};
     //Button btn_scan;
     TextView tv_Tablenum;
-    int tablenum;
+
     private static String url_send_tablenum = MainActivity.ipBaseAddress+"/obtain_table_ordersJSON.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_PRODUCT = "product";
@@ -57,7 +57,12 @@ public class MainActivity extends AppCompatActivity {
         pagerAdapter = new MyPagerAdapter(this);
         viewPager = findViewById(R.id.mypager);
         viewPager.setAdapter(pagerAdapter);
-        //scanCode();
+        //scanCode(); // taken out to QR_Page
+
+        // to be fix, havent done
+        Intent myintent =getIntent();
+        String tableNumget = getIntent().getStringExtra("tableNum");
+        tv_Tablenum.setText("Table is this thingy"+tableNumget);
 
 //inflating tab layout
         TabLayout tabLayout =( TabLayout) findViewById(R.id.tab_layout);
