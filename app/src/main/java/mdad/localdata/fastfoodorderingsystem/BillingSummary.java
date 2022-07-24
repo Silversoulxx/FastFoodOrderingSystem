@@ -87,7 +87,7 @@ public class BillingSummary extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_billing_summary, container, false);
-        tvBillTotal = root.findViewById(R.id.tvBillTotal);
+        tvBillTotal = (TextView) root.findViewById(R.id.tvBillTotal);
         lv = root.findViewById(R.id.list);
         // ArrayList for ListView
         productsList = new ArrayList<HashMap<String, String>>();
@@ -131,7 +131,11 @@ public class BillingSummary extends Fragment {
                     String price = c.getString(TAG_PRICE);
                     String quantity = c.getString(TAG_QUANTITY);
                     String subtotal = c.getString(TAG_SUBTOTAL);
-                    //int subtotalint = Integer.parseInt(subtotal);
+                    /*int subtotalint = Integer.parseInt(subtotal);
+                    int grandtotal=0;
+                    grandtotal+=subtotalint;
+                    String.valueOf(grandtotal);
+                    tvBillTotal.setText(grandtotal);*/
                     //int total = c.getInt(TAG_TOTAL);
 
                     // creating new HashMap
