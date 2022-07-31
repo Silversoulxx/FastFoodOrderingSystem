@@ -137,7 +137,7 @@ public class BillingSummary extends Fragment {
                     String grandtotals=String.format("%.2f",grandtotal);
 
                     tvBillTotal.setText("Total: $"+ grandtotals);
-                    //int total = c.getInt(TAG_TOTAL);
+
 
                     // creating new HashMap
                     HashMap<String, String> map = new HashMap<String, String>();

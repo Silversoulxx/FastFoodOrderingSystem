@@ -113,8 +113,8 @@ public class QR_Page extends AppCompatActivity {
                 try {
                     if(response.getInt(TAG_SUCCESS)==1){
                         finish();
-                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(i);
+//                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+//                        startActivity(i);
 
 
                         Log.i("Update successful", "Update ok");
