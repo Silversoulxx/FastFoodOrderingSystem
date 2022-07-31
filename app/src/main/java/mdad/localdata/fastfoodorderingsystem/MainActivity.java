@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_PRODUCT = "product";
     private static final String TAG_TABLE_ID = "TABLE_ID";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,9 +70,11 @@ public class MainActivity extends AppCompatActivity {
 //displaying tabs
         new TabLayoutMediator(tabLayout, viewPager,(tab, position) -> tab.setText(titles[position])).attach();
 
-
     }
-
+//    private String tablenumsend = getIntent().getStringExtra("tableNum");
+//    public String gettablenum(){
+//        return tablenumsend;
+//    }
 
 
     private class MyPagerAdapter extends FragmentStateAdapter {

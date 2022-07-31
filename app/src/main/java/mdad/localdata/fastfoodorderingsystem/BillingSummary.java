@@ -1,10 +1,12 @@
 package mdad.localdata.fastfoodorderingsystem;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,8 +60,9 @@ public class BillingSummary extends Fragment {
     private static final String TAG_PRICE = "PRICE";
     private static final String TAG_QUANTITY = "QTY";
     private static final String TAG_SUBTOTAL = "SUBTOTAL";
-    //private static final String TAG_TOTAL = "TOTAL";
-    // products JSONArray
+    private static final String TAG_TABLE_NUM = "TABLE_NUMBER";
+
+
     JSONArray TABLE_ORDERS = null;
     public BillingSummary() {
         // Required empty public constructor
@@ -91,8 +94,21 @@ public class BillingSummary extends Fragment {
         lv = root.findViewById(R.id.list);
         // ArrayList for ListView
         productsList = new ArrayList<HashMap<String, String>>();
+
+        JSONObject dataJson = new JSONObject();
+        MainActivity activity = (MainActivity) getActivity();
+//        String tablenum = activity.gettablenum();
+        String tablenum = getActivity().getIntent().getExtras().getString("tableNum");
+        try{
+            dataJson.put(TAG_TABLE_NUM, tablenum);
+            Log.i("tablenum",tablenum);
+        }catch(JSONException e){
+
+            Log.i("JSON Exception  =======", e.toString());
+
+        }
         // Loading billing items in Background Thread
-        postData(url_all_products, null);
+        postData(url_all_products, dataJson);
 
         return root;
 
@@ -145,13 +161,6 @@ public class BillingSummary extends Fragment {
                     // adding each child node to HashMap key => value
                     map.put(TAG_ITEM_NAME, "Item: "+item+ "       Price: $"+price+ "       Qty: "+quantity);
                     map.put(TAG_SUBTOTAL, "Subtotal: $" +subtotal);
-/*                    int grandtotal=0;
-                    for (int e=0; e <subtotal.length(); e++){
-                        grandtotal += Integer.parseInt(subtotal(e));
-                        System.out.println("sum->" + grandtotal);
-                    };*/
-                    //tvBillTotal.setText(total);
-
 
                     // adding HashList to ArrayList
                     productsList.add(map);
