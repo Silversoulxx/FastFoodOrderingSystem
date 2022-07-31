@@ -93,7 +93,7 @@ return Appetizer.newInstance( );
 // return ThirdFragment.newInstance( );
                 }
                 case 3: {
-//return BillingSummary.newInstance( );
+return BillingSummary.newInstance( );
                 }
                 default:
                     return new Fragment(); // return a dummy empty fragment first

@@ -121,6 +121,7 @@ public class BillingSummary extends Fragment {
                 // products found
                 // Getting Array of Products
                 TABLE_ORDERS = response.getJSONArray(TAG_TABLEORDERS);
+                double grandtotal=0;
 
                 // looping through All Products
                 for (int i = 0; i < TABLE_ORDERS.length(); i++) {
@@ -131,11 +132,11 @@ public class BillingSummary extends Fragment {
                     String price = c.getString(TAG_PRICE);
                     String quantity = c.getString(TAG_QUANTITY);
                     String subtotal = c.getString(TAG_SUBTOTAL);
-                    /*int subtotalint = Integer.parseInt(subtotal);
-                    int grandtotal=0;
+                    double subtotalint = Double.parseDouble(subtotal);
                     grandtotal+=subtotalint;
-                    String.valueOf(grandtotal);
-                    tvBillTotal.setText(grandtotal);*/
+                    String grandtotals=String.format("%.2f",grandtotal);
+
+                    tvBillTotal.setText("Total: $"+ grandtotals);
                     //int total = c.getInt(TAG_TOTAL);
 
                     // creating new HashMap
