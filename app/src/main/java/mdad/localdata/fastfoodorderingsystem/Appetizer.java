@@ -57,7 +57,6 @@ public class Appetizer extends Fragment {
 
 
     String name1, price1, quantity1, name2, price2, quantity2;
-
     private static final String TAG_ITEM_NAME = "ITEM_NAME";
     private static final String TAG_PRICE = "PRICE";
     private static final String TAG_QUANTITY = "QUANTITY";
@@ -77,7 +76,6 @@ public class Appetizer extends Fragment {
         super.onCreate(savedInstanceState);
 
         app_qty_1 = (EditText) getView().findViewById(R.id.app_qty_1);
-
         app_qty_2 = (EditText) getView().findViewById(R.id.app_qty_2);
         tv_app1 = (TextView) getView().findViewById(R.id.tv_app1);
         tv_app2 = (TextView) getView().findViewById(R.id.tv_app2);
@@ -158,7 +156,7 @@ public class Appetizer extends Fragment {
         postData(url_update_menu, dataJson);
     }
 
-    ;
+
 
     public void postData(String url, final JSONObject json) {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
