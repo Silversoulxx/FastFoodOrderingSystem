@@ -27,11 +27,7 @@ import com.journeyapps.barcodescanner.ViewfinderView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Appetizer#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Appetizer extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -61,7 +57,7 @@ public class Appetizer extends Fragment {
     private static final String TAG_PRICE = "PRICE";
     private static final String TAG_QUANTITY = "QUANTITY";
     private static String url_update_menu = MainActivity.ipBaseAddress + "/update_menu.php";
-    private Context context;
+
 
     // TODO: Rename and change types and number of parameters
     public static Appetizer newInstance() {
@@ -92,16 +88,16 @@ public class Appetizer extends Fragment {
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //check_data();
-                submit_app1();
+                check_data();
+
                 //on here submit all the data
             }
 
             private void check_data() {
-                if (app_qty_1.equals("1") ) {
+                if (app_qty_1 != null ) {
                     submit_app1();
                     // to be confirm is from here send to Database , if yes create function, function will be take to JSON
-                } else /*(app_qty_2 != null)*/ {
+                } else if (app_qty_2 != null ) {
                     submit_app2();
                 }
 
@@ -152,6 +148,8 @@ public class Appetizer extends Fragment {
 
         } catch (JSONException e) {
 
+            Log.i("JSONException", e.toString());
+
         }
         postData(url_update_menu, dataJson);
     }
@@ -159,15 +157,20 @@ public class Appetizer extends Fragment {
 
 
     public void postData(String url, final JSONObject json) {
+
+
+        //Log.i("request", "Testing");
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        Log.i("request", String.valueOf(requestQueue));
+        //Log.i("request", "Testing2");
+
+
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
                 Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast toast = Toast.makeText(context.getApplicationContext(),
-                        "entered.",Toast.LENGTH_SHORT);
-                toast.show();
+
+
+                //Log.i("aabc", "Success");
                 //checkResponse(response, json); //post only
             }
 
