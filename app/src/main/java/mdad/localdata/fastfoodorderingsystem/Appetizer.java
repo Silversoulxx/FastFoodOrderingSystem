@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -161,12 +162,14 @@ public class Appetizer extends Fragment {
 
     public void postData(String url, final JSONObject json) {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        Log.i("request", String.valueOf(requestQueue));
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
                 Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Toast toast = Toast.makeText(context.getApplicationContext(),
                         "entered.",Toast.LENGTH_SHORT);
+                toast.show();
                 //checkResponse(response, json); //post only
             }
 
