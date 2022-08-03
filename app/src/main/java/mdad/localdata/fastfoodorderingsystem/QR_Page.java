@@ -70,7 +70,7 @@ public class QR_Page extends AppCompatActivity {
 
             tablenum=result.getContents();
 
-            //24/7 to be fix
+            //24/7 to be fix, updated fixed
             Intent intent = new Intent(QR_Page.this,MainActivity.class);
             intent.putExtra("tableNum",result.getContents());
             startActivity(intent);

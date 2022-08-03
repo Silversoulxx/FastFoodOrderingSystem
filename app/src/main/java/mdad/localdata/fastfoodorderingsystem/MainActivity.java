@@ -59,11 +59,21 @@ public class MainActivity extends AppCompatActivity {
         //scanCode(); // taken out to QR_Page
 
         // 24/7to be fix, havent done
-        Intent incomingintent =getIntent();
-        String tableNumget = incomingintent.getStringExtra("tableNum");
-        //Log.i("tableNumget", tableNumget); //when set this will crash, but it show i success to get QR scan , unable show on text view, only show as Null
+        //Intent incomingintent =getIntent();
+        //String tableNumget = incomingintent.getStringExtra("tableNum");
+
+        Bundle extras = getIntent().getExtras();
+        String tableNum="000";
+
+        if (extras != null) {
+            tableNum = extras.getString("tableNum");
+            // and get whatever type user account id is
+        }
+        // log cause crash for some reason, to be fix again, updated fixed
+
+        Log.i("tableNum", tableNum); //when set this will crash, but it show i success to get QR scan , unable show on text view, only show as Null
         tv_Tablenum = (TextView) findViewById(R.id.tv_Tablenum);
-        tv_Tablenum.setText("Table is this thingy" + tableNumget ); // ffs , for some reason it will reload back even i success, something is wrong,but i duno where
+        tv_Tablenum.setText("Table is this thingy" + tableNum ); // ffs , for some reason it will reload back even i success, something is wrong,but i duno where
 
 //inflating tab layout
         TabLayout tabLayout =( TabLayout) findViewById(R.id.tab_layout);
