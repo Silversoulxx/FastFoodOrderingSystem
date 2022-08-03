@@ -3,6 +3,7 @@ package mdad.localdata.fastfoodorderingsystem;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -53,17 +54,15 @@ public class Dessert extends Fragment {
     private static String url_update_menu = MainActivity.ipBaseAddress + "/update_menu.php";
 
     // TODO: Rename and change types and number of parameters
-    public static Dessert newInstance(String param1, String param2) {
+    public static Dessert newInstance() {
         Dessert fragment = new Dessert();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         des_qty_1 = (EditText) getView().findViewById(R.id.des_qty_1);

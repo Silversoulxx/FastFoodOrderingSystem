@@ -98,10 +98,10 @@ public class MainActivity extends AppCompatActivity {
 return Appetizer.newInstance( );
                 }
                 case 1: {
-// return SecondFragment.newInstance( );
+return MainDish.newInstance( );
                 }
                 case 2: {
-// return ThirdFragment.newInstance( );
+return Dessert.newInstance( );
                 }
                 case 3: {
 return BillingSummary.newInstance( );
