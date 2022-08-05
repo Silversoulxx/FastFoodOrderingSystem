@@ -40,11 +40,11 @@ public class QR_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_page);
         //scanCode();
-
+        // here to//
         Intent intent = new Intent(QR_Page.this,MainActivity.class);
         intent.putExtra("tableNum","1");
         startActivity(intent);
-
+        // here // is to be delete, this is for test only
 
     }
     private void scanCode(){
