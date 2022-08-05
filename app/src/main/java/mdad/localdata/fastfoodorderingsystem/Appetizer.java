@@ -113,27 +113,15 @@ public class Appetizer extends Fragment {
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //check_data();
+
                 submit_app1();
                 submit_app2();
                 //on here submit all the data
             }
 
-            private void check_data() {
-                while(app_qty_1 !=null){
-                    submit_app1();
-                }
 
-                /*
-                if (app_qty_1 != null ) {
-                    submit_app1();
-                    // to be confirm is from here send to Database , if yes create function, function will be take to JSON
-                } else if (app_qty_2 != null ) {
-                    submit_app2();
-                }*/
 
-            }
-        });
+            });
 
 
     }
