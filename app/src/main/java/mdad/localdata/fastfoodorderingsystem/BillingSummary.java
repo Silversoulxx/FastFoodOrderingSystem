@@ -142,7 +142,7 @@ public class BillingSummary extends Fragment {
                 // looping through All Products
                 for (int i = 0; i < TABLE_ORDERS.length(); i++) {
                     JSONObject c = TABLE_ORDERS.getJSONObject(i);
-
+                    //String MAXID = c.getString(TAG_MAXID);
                     // Storing each json item in variable
                     String item = c.getString(TAG_ITEM_NAME);
                     String price = c.getString(TAG_PRICE);
