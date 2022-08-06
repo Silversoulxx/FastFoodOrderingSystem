@@ -73,7 +73,7 @@ public class Dessert extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //Obtaining table number from MainActivity
         JSONObject dataJson = new JSONObject();
         String tablenum = getActivity().getIntent().getExtras().getString("tableNum");
         try {
@@ -83,6 +83,7 @@ public class Dessert extends Fragment {
         } catch (JSONException e) {
 
         }
+        //Sends table number to obtain table_id assigned to differentiate table guests with same table number
         pullData(url_obtain_tablid,dataJson);
 
         des_qty_1 = (EditText) getView().findViewById(R.id.des_qty_1);
@@ -102,7 +103,7 @@ public class Dessert extends Fragment {
             public void onClick(View v) {
                 submit_app1();
                 submit_app2();
-
+                //call to submit all the data on click of submit button
             }
 
 
@@ -116,6 +117,8 @@ public class Dessert extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_dessert, container, false);
     }
+
+    //Line 2 items posting
     public void submit_app2() {
 
         name2 = tv_des2.getText().toString();
@@ -135,7 +138,7 @@ public class Dessert extends Fragment {
         }
         postData(url_update_menu, dataJson);
     }
-
+    //Line 1 items posting
     public void submit_app1() {
 
         name1 = tv_des1.getText().toString();
@@ -152,20 +155,20 @@ public class Dessert extends Fragment {
 
         } catch (JSONException e) {
 
-            Log.i("JSONException", e.toString());
+
 
         }
         postData(url_update_menu, dataJson);
     }
 
 
-
+    //function to send data into database used by all lines
     public void postData(String url, final JSONObject json) {
 
 
-        //Log.i("request", "Testing");
+
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        //Log.i("request", "Testing2");
+
 
 
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
@@ -174,8 +177,7 @@ public class Dessert extends Fragment {
             public void onResponse(JSONObject response) {
 
 
-                //Log.i("aabc", "Success");
-                //checkResponse(response, json); //post only
+
             }
 
         }, new Response.ErrorListener() {
@@ -185,9 +187,10 @@ public class Dessert extends Fragment {
         });
         requestQueue.add(json_obj_req);
     }
+
+    // Function used to pull table ID info
     public void pullData(String url, final JSONObject json) {
 
-        Log.i("url-----------",url );
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
@@ -196,7 +199,6 @@ public class Dessert extends Fragment {
             public void onResponse(JSONObject response) {
 
 
-                Log.i("abcdef","success");
                 checkResponse(response, json);
 
 
@@ -213,7 +215,7 @@ public class Dessert extends Fragment {
 
 
 
-
+    // Function used to pull from PullData, this will be called to generate the latest table number's table ID
     private void checkResponse(JSONObject response, JSONObject creds) {
         try {
             if (response.getInt(TAG_SUCCESS) == 1) {
@@ -227,7 +229,7 @@ public class Dessert extends Fragment {
                 for (int i = 0; i < TABLE_ORDERS.length(); i++) {
                     JSONObject c = TABLE_ORDERS.getJSONObject(i);
                     maxid = c.getString(TAG_MAXID);
-                    Log.i("overhere",maxid);
+
 
                 }
 

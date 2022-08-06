@@ -58,22 +58,15 @@ public class MainActivity extends AppCompatActivity {
         pagerAdapter = new MyPagerAdapter(this);
         viewPager = findViewById(R.id.mypager);
         viewPager.setAdapter(pagerAdapter);
-        //scanCode(); // taken out to QR_Page
-
-        // 24/7to be fix, havent done
-        //Intent incomingintent =getIntent();
-        //String tableNumget = incomingintent.getStringExtra("tableNum");
 
         Bundle extras = getIntent().getExtras();
         String tableNum="000";
 
         if (extras != null) {
             tableNum = extras.getString("tableNum");
-            // and get whatever type user account id is
+            // to get table number scanned
         }
-        // log cause crash for some reason, to be fix again, updated fixed
-
-        Log.i("tableNum", tableNum); //when set this will crash, but it show i success to get QR scan , unable show on text view, only show as Null
+        // to show the table number on the top activity page
         tv_Tablenum = (TextView) findViewById(R.id.tv_Tablenum);
         tv_Tablenum.setText("Table number: " + tableNum ); // ffs , for some reason it will reload back even i success, something is wrong,but i duno where
 
@@ -83,12 +76,9 @@ public class MainActivity extends AppCompatActivity {
         new TabLayoutMediator(tabLayout, viewPager,(tab, position) -> tab.setText(titles[position])).attach();
 
     }
-//    private String tablenumsend = getIntent().getStringExtra("tableNum");
-//    public String gettablenum(){
-//        return tablenumsend;
-//    }
 
 
+//Using PagerAdapter to call 3 fragments and display
     private class MyPagerAdapter extends FragmentStateAdapter {
         public MyPagerAdapter(FragmentActivity fa) {
             super(fa);
@@ -114,98 +104,12 @@ return BillingSummary.newInstance( );
             }
         }
         @Override
+        //This will set the number of tabs
         public int getItemCount() {
             return NUM_PAGES;
         }
     }
-//comment out , to be remove
-/*
-    private void scanCode(){
-        ScanOptions options = new ScanOptions();
-        options.setPrompt("Volume up to flash on");
-        options.setBeepEnabled(true);
-        options.setOrientationLocked(true);
-        options.setCaptureActivity(CaptureAct.class);
-        barLaucher.launch(options);
 
-
-    }
-
-    ActivityResultLauncher<ScanOptions> barLaucher = registerForActivityResult(new ScanContract(), result ->
-    {
-        if(result.getContents() !=null)
-        {
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(i);
-
-            tv_Tablenum =findViewById(R.id.tv_Tablenum);
-
-            tv_Tablenum.setText("Table "+result.getContents());
-            tablenum =Integer.parseInt(result.getContents());
-            sendData();
-
-        }
-    });
-
-
-    private void sendData(){
-
-
-        JSONObject dataJson = new JSONObject();
-
-        try{
-            dataJson.put(TAG_TABLE_ID, tablenum);
-
-        }catch(JSONException e){
-
-            Log.i("JSON Exception  =======", e.toString());
-
-        }
-        postData(url_send_tablenum,dataJson);
-
-    }
-    public void postData(String url, final JSONObject json){
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-
-        Log.i("URL is =======", url);
-        JsonObjectRequest json_obj_req = new JsonObjectRequest(
-                Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-
-                try {
-                    if(response.getInt(TAG_SUCCESS)==1){
-                        finish();
-                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                         startActivity(i);
-
-                        Log.i("Update successful", "Update ok");
-
-                    }else{
-
-
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-
-                }
-
-            }
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                Toast.makeText(getApplicationContext(),"Error in Volley",Toast.LENGTH_LONG).show();
-            }
-
-        });
-
-        requestQueue.add(json_obj_req);
-    }
-*/
 
 
 

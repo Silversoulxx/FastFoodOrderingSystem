@@ -100,15 +100,7 @@ public class BillingSummary extends Fragment {
         productsList = new ArrayList<HashMap<String, String>>();
 
         JSONObject dataJson = new JSONObject();
-//        FragmentTransaction ft = getParentFragmentManager().beginTransaction();
-//        if (Build.VERSION.SDK_INT >= 26) {
-//            ft.setReorderingAllowed(false);
-//        }
-//        ft.detach(this).attach(this).commit();
-
-//        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-//        transaction.setReorderingAllowed(false);
-//        transaction.detach(this).attach(this).commitAllowingStateLoss();
+        //obtain table number from MainActivity
         String tablenum = getActivity().getIntent().getExtras().getString("tableNum");
         try{
             dataJson.put(TAG_TABLE_NUM, tablenum);
@@ -118,12 +110,14 @@ public class BillingSummary extends Fragment {
             Log.i("JSON Exception  =======", e.toString());
 
         }
-        // Loading billing items in Background Thread
+        // Loading billing items in Background Thread filtered using tablenum
         postData(url_all_products, dataJson);
 
         return root;
 
     }
+
+    //below set to refresh the items to the latest table number orders upon pressing "Bill" tab
     public void onResume() {
         super.onResume();
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
@@ -166,6 +160,8 @@ public class BillingSummary extends Fragment {
                     String price = c.getString(TAG_PRICE);
                     String quantity = c.getString(TAG_QUANTITY);
                     String subtotal = c.getString(TAG_SUBTOTAL);
+
+                    //Calculating and displaying grand total
                     double subtotalint = Double.parseDouble(subtotal);
                     grandtotal+=subtotalint;
                     String grandtotals=String.format("%.2f",grandtotal);

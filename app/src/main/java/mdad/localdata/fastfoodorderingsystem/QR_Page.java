@@ -44,7 +44,7 @@ public class QR_Page extends AppCompatActivity {
 
     }
     private void scanCode(){
-        ScanOptions options = new ScanOptions(); //summon function for scan
+        ScanOptions options = new ScanOptions(); //call function for scan
         options.setPrompt("Volume up to flash on");
         options.setBeepEnabled(true);
         options.setOrientationLocked(true);
@@ -58,32 +58,23 @@ public class QR_Page extends AppCompatActivity {
     {
         if(result.getContents() !=null)
         {
-            /*AlertDialog.Builder builder = new AlertDialog.Builder(QR_Page.this);//<< please put QR_Page not main activity
-            builder.setTitle("Result");
-            builder.setMessage(result.getContents());
-            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            }).show();*/
 
+            //setting the results obtained from QR scan to a variable
             tablenum=result.getContents();
 
-            //24/7 to be fix, updated fixed
+            //intent it to the MainActivity and send the data of table number
             Intent intent = new Intent(QR_Page.this,MainActivity.class);
             intent.putExtra("tableNum",result.getContents());
             startActivity(intent);
 
 
 
-
+            //This calls the function to send it to database
             sendData();
 
         }
     });
-
-
+        //This function will send the table number and request to assign a table ID which is meant to differentiate new guests who are sitting at the same table after a turnover
     private void sendData(){
 
 
@@ -94,8 +85,6 @@ public class QR_Page extends AppCompatActivity {
 
         }catch(JSONException e){
 
-            Log.i("JSON Exception  =======", e.toString());
-
         }
         postData(url_send_tablenum,dataJson);
 
@@ -104,7 +93,6 @@ public class QR_Page extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        Log.i("URL is =======", url);
         JsonObjectRequest json_obj_req = new JsonObjectRequest(
                 Request.Method.POST, url, json, new Response.Listener<JSONObject>() {
             @Override
@@ -113,11 +101,7 @@ public class QR_Page extends AppCompatActivity {
                 try {
                     if(response.getInt(TAG_SUCCESS)==1){
                         finish();
-//                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-//                        startActivity(i);
 
-
-                        Log.i("Update successful", "Update ok");
 
                     }else{
 
