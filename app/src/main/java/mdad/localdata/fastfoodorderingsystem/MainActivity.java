@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("tableNum", tableNum); //when set this will crash, but it show i success to get QR scan , unable show on text view, only show as Null
         tv_Tablenum = (TextView) findViewById(R.id.tv_Tablenum);
-        tv_Tablenum.setText("Table is this thingy" + tableNum ); // ffs , for some reason it will reload back even i success, something is wrong,but i duno where
+        tv_Tablenum.setText("Table number: " + tableNum ); // ffs , for some reason it will reload back even i success, something is wrong,but i duno where
 
 //inflating tab layout
         TabLayout tabLayout =( TabLayout) findViewById(R.id.tab_layout);
