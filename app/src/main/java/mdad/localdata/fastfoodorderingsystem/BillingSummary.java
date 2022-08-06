@@ -1,9 +1,13 @@
 package mdad.localdata.fastfoodorderingsystem;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 
 
 import android.util.Log;
@@ -96,8 +100,15 @@ public class BillingSummary extends Fragment {
         productsList = new ArrayList<HashMap<String, String>>();
 
         JSONObject dataJson = new JSONObject();
-        MainActivity activity = (MainActivity) getActivity();
-//        String tablenum = activity.gettablenum();
+//        FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+//        if (Build.VERSION.SDK_INT >= 26) {
+//            ft.setReorderingAllowed(false);
+//        }
+//        ft.detach(this).attach(this).commit();
+
+//        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+//        transaction.setReorderingAllowed(false);
+//        transaction.detach(this).attach(this).commitAllowingStateLoss();
         String tablenum = getActivity().getIntent().getExtras().getString("tableNum");
         try{
             dataJson.put(TAG_TABLE_NUM, tablenum);
@@ -111,6 +122,13 @@ public class BillingSummary extends Fragment {
         postData(url_all_products, dataJson);
 
         return root;
+
+    }
+    public void onResume() {
+        super.onResume();
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.setReorderingAllowed(false);
+        transaction.detach(this).attach(this).commitAllowingStateLoss();
 
     }
 //postData will obtain the database list of bills and list

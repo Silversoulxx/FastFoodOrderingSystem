@@ -75,9 +75,9 @@ public class Dessert extends Fragment {
         super.onCreate(savedInstanceState);
 
         JSONObject dataJson = new JSONObject();
-
+        String tablenum = getActivity().getIntent().getExtras().getString("tableNum");
         try {
-            dataJson.put("TABLE_NUM","5");
+            dataJson.put("tableNum",tablenum);
 
 
         } catch (JSONException e) {
